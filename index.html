@@ -335,7 +335,14 @@ html[data-theme=dark] .acct b{color:#f4c95d}
 html[data-theme=dark] .vic{background:#f4c95d;color:#1a0508}
 html[data-theme=dark] .cctv{background:#1b0b11;border-color:rgba(224,100,90,.5);color:#ff8f86}
 html[data-theme=dark] .tw .tribute{border-color:#f4c95d}
-html[data-theme=dark] .sched+#namamrita:before,html[data-theme=dark] .sched+#namamrita:after{opacity:1}nav .wrap{padding:0 8px}nav .cap{width:100%;max-width:440px;justify-content:space-between;gap:2px;padding:4px 8px 4px 6px}nav a{flex:none;padding:6px 11px}.tgA{margin:0 0 0 2px;width:32px;height:32px}@media(max-width:370px){nav a{padding:6px 7px;font-size:14px}}@media(max-width:345px){nav a{padding:6px 5px;font-size:13px}nav .cap{padding:4px 5px 4px 4px}.tgA{width:28px;height:28px}}.verse cite{font-family:'Hind Siliguri',sans-serif!important;font-size:16.5px;font-weight:600;letter-spacing:.2px}</style>
+html[data-theme=dark] .sched+#namamrita:before,html[data-theme=dark] .sched+#namamrita:after{opacity:1}nav .wrap{padding:0 8px}nav .cap{width:100%;max-width:440px;justify-content:space-between;gap:2px;padding:4px 8px 4px 6px}nav a{flex:none;padding:6px 11px}.tgA{margin:0 0 0 2px;width:32px;height:32px}@media(max-width:370px){nav a{padding:6px 7px;font-size:14px}}@media(max-width:345px){nav a{padding:6px 5px;font-size:13px}nav .cap{padding:4px 5px 4px 4px}.tgA{width:28px;height:28px}}.verse cite{font-family:'Hind Siliguri',sans-serif!important;font-size:16.5px;font-weight:600;letter-spacing:.2px}.cm{border-radius:22px;padding:6px 12px 24px;margin-top:28px;border:2px solid}
+.cm .sub-h{margin:22px 0 18px}
+.cm1{background:#fff1d6;border-color:#e0a92b}.cm2{background:#f6e3e7;border-color:#9a2a3a}
+.cm2 .sub-h{color:#9a2a3a!important}
+html[data-theme=dark] .cm1{background:#1f1409;border-color:#f4c95d}html[data-theme=dark] .cm2{background:#1c0a10;border-color:#c24557}
+html[data-theme=dark] .cm2 .sub-h{color:#ff9a8f!important}
+.cm .node:not(.top){background:#fff}html[data-theme=dark] .cm .node:not(.top){background:#120508}
+</style>
 <script>(function(){var r=document.documentElement,k='rm-theme',q=(location.search.match(/t=(dark|light)/)||[])[1],p=null;try{p=localStorage.getItem(k)}catch(e){}
 var sys=window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';r.setAttribute('data-theme',q||p||sys);
 function set(t){r.setAttribute('data-theme',t);try{localStorage.setItem(k,t)}catch(e){}}
@@ -484,7 +491,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="wrap">
     <div class="sec-h"><h2>ভক্তকৃপা প্রার্থী</h2><span class="orn">🙏</span></div>
 
-    <p class="sub-h first">শ্রীশ্রী রাস মহোৎসব উদ্‌যাপন পরিষদ ১৪৩৩ বঙ্গাব্দ, ২০২৬ খ্রিস্টাব্দ</p>
+    <div class="cm cm1">
+    <p class="sub-h">শ্রীশ্রী রাস মহোৎসব উদ্‌যাপন পরিষদ ১৪৩৩ বঙ্গাব্দ, ২০২৬ খ্রিস্টাব্দ</p>
     <div class="chart">
       <div class="node top"><b>শ্রী সাধন রঞ্জন চৌধুরী</b><span>সভাপতি</span></div>
       <i class="ln"></i>
@@ -499,11 +507,15 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       <div class="chips"><span>শ্রী মিশু চৌধুরী</span><span>শ্রী দীপ্ত বোস (নয়ন)</span></div>
     </div>
 
+    </div>
+    <div class="cm cm2">
     <p class="sub-h">শ্রীশ্রী রাসবিহারী ধাম পরিচালনা পরিষদ</p>
     <div class="chart">
       <div class="node top"><b>শ্রী তপন চৌধুরী (বাবু)</b><span>সভাপতি</span></div>
       <i class="ln"></i>
       <div class="node"><b>শ্রী বিশ্বজিৎ চৌধুরী (বিশু)</b><span>সাধারণ সম্পাদক</span></div>
+    </div>
+
     </div>
 
     <div class="tabs2" role="tablist">
