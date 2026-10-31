@@ -342,6 +342,12 @@ html[data-theme=dark] .sched+#namamrita:before,html[data-theme=dark] .sched+#nam
 html[data-theme=dark] .cm1{background:#1f1409;border-color:#f4c95d}html[data-theme=dark] .cm2{background:#1c0a10;border-color:#c24557}
 html[data-theme=dark] .cm2 .sub-h{color:#ff9a8f!important}
 .cm .node:not(.top){background:#fff}html[data-theme=dark] .cm .node:not(.top){background:#120508}
+#namamrita{overflow:visible}
+#namamrita .wrap{position:relative;z-index:1}
+.kbg{position:absolute;inset:-30px 0;overflow:hidden;pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(transparent,#000 16%,#000 84%,transparent)}
+.kbg img{position:absolute;object-fit:cover;inset:0;width:100%;height:100%;opacity:.14;object-position:50% 45%}
+.karch{width:150px;height:190px;margin:0 auto 18px;border-radius:999px 999px 14px 14px;overflow:hidden;border:4px solid #e0a92b;box-shadow:0 0 0 5px rgba(224,169,43,.3),0 14px 30px rgba(0,0,0,.5)}
+.karch img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
 </style>
 <script>(function(){var r=document.documentElement,k='rm-theme',q=(location.search.match(/t=(dark|light)/)||[])[1],p=null;try{p=localStorage.getItem(k)}catch(e){}
 var sys=window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';r.setAttribute('data-theme',q||p||sys);
@@ -475,7 +481,9 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 </section>
 
 <section id="namamrita">
+  <div class="kbg"><img src="img/kirtan.jpg" alt="" loading="lazy"></div>
   <div class="wrap">
+    <div class="karch"><img src="img/kirtan.jpg" alt="কীর্তনীয়াদের কীর্তন" loading="lazy"></div>
     <div class="sec-h"><h2>নামামৃত পরিবেশনায়</h2><span class="orn">❀ ❀ ❀</span></div>
     <div class="sampro">
       <div class="card"><div class="ic">🐚</div><h3>ব্রজের মাধুরী সম্প্রদায়</h3><div class="pl">পিরোজপুর</div><div class="ms">মাস্টার – রমা সমাদ্দার</div></div>
