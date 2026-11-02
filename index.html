@@ -371,7 +371,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <p class="occasion">শ্রী বিগ্রহের <b>৩৭তম</b> প্রতিষ্ঠা বার্ষিকী উদ্‌যাপন ও রাসমহোৎসবের <b>৭১তম</b> বর্ষ পূর্তি উপলক্ষে</p>
     <h1>ষোড়শ প্রহরব্যাপী মহানামসংকীর্তন, কৃষ্ণলীলা প্রদর্শনী, রাসমেলা ও মনোজ্ঞ সংগীতানুষ্ঠান</h1>
     <div class="badge">৫ দিনব্যাপী শাকপুরা</div>
-    <div class="title">রা<span class="r">স</span>ম<span class="y">হো</span><span class="g">ৎ</span>স<span class="r">ব</span></div>
+    <div class="title"><span class="ti">রা<span class="r">স</span>ম<span class="y">হো</span><span class="g">ৎ</span>স<span class="r">ব</span></span></div>
     <div class="year">২০<span class="r">২</span>৬ খ্রিস্টাব্দ</div>
     <p class="dates"><b>৪, ৫, ৬, ৭ ও ৮ অগ্রহায়ণ ১৪৩৩ বঙ্গাব্দ;</b><br><span class="dd">২১, ২২, ২৩, ২৪ ও ২৫ নভেম্বর ২০২৬ খ্রিস্টাব্দ</span><br>শনিবার, রবিবার, সোমবার, মঙ্গলবার ও বুধবার</p>
     <div class="venue"><small>উৎসব মণ্ডপ: বাংলাদেশের আদি রাসস্থলী</small><strong>শ্রীশ্রী রাসবিহারী ধাম-শাকপুরা</strong><small>বোয়ালখালী, চট্টগ্রাম</small></div>
@@ -761,5 +761,13 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   tick();setInterval(tick,1000);
 })();
 </script>
+<script>(function(){var t=document.querySelector('.title .ti');if(!t)return;
+function fit(){try{var p=t.parentNode,cs=getComputedStyle(p);if(cs.textAlign!=='center'){t.style.left='0px';return}
+var c=document.createElement('canvas').getContext('2d');c.font=cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;c.textAlign='left';
+var m=c.measureText(t.textContent);if(m.actualBoundingBoxLeft==null||!m.width)return;
+var sh=m.width/2-(m.actualBoundingBoxRight-m.actualBoundingBoxLeft)/2;
+t.style.left=Math.max(-40,Math.min(40,sh)).toFixed(1)+'px';window.__tshift=sh}catch(e){}}
+t.style.position='relative';
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);fit()})();</script>
 </body>
 </html>
