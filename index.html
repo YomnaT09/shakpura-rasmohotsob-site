@@ -397,6 +397,12 @@ html[data-theme=dark] .tab{background:#170a0f!important;color:#f4c95d!important}
 .lv .c.now:before{content:"● এখন";display:block;color:#ff7a5c;font-size:12px;font-weight:700}
 .lv .c.soon{border:1.5px dashed #f4c95d}.lv .c.soon:before{content:"পরের";display:block;color:#ffd979;font-size:12px}
 @media(min-width:700px){.lv{padding-right:14px}.lv .rail{justify-content:center}}
+@media(min-width:700px){.count.islive{max-width:980px}.lv{padding:16px 18px 18px}.lv .rail{overflow:visible;flex-wrap:wrap;justify-content:center;padding:6px 0 4px}.lv .c{flex:1 1 150px;max-width:190px;padding:12px 10px}.lv .c .nm{font-size:14.5px}}
+.count.islive{background:radial-gradient(ellipse at 50% 30%,#0f6b48,#06301f 80%)!important;border:1px solid rgba(255,214,102,.6)!important}
+.count.islive .lv h4{color:#ffe38a}
+.count.islive .lv .c{background:rgba(0,0,0,.22);border-color:rgba(255,214,102,.35);color:#e6f5ec}.count.islive .lv .c .tm{color:#ffd666}
+.count.islive .lv .c.now{background:linear-gradient(160deg,rgba(255,196,58,.5),rgba(6,48,31,.4));border-color:#ffd666;color:#fff;box-shadow:0 0 22px rgba(255,214,102,.55)}
+.count.islive .lv .c.now:before{color:#ffb199}.count.islive .lv .c.soon{border-color:#ffd666}.count.islive .lv .c.soon:before{color:#ffd666}
 </style>
 <script>(function(){var r=document.documentElement,k='rm-theme',q=(location.search.match(/t=(dark|light)/)||[])[1],p=null;try{p=localStorage.getItem(k)}catch(e){}
 var sys=window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';r.setAttribute('data-theme',q||p||sys);
@@ -807,15 +813,15 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 
   var start=new Date('2026-11-21T00:00:00+06:00').getTime();
   var end=new Date('2026-11-26T00:00:00+06:00').getTime();
-  var lbl=document.getElementById('cdLabel'),cd=document.querySelector('.count .cd'),live=document.getElementById('live'),sig='';
+  var box=document.querySelector('.count'),lbl=document.getElementById('cdLabel'),cd=document.querySelector('.count .cd'),live=document.getElementById('live'),sig='';
   function tick(){
     var now=Date.now(),diff=start-now;
     if(now>=start&&now<end){
-      lbl.style.display='none';cd.style.display='none';live.hidden=false;
+      lbl.style.display='none';cd.style.display='none';live.hidden=false;box.classList.add('islive');
       var t=dh(),sg=sigOf(t);if(sg!==sig){sig=sg;render(live,t)}
       return;
     }
-    live.hidden=true;lbl.style.display='';cd.style.display='';
+    live.hidden=true;lbl.style.display='';cd.style.display='';box.classList.remove('islive');
     if(diff<=0){lbl.textContent='রাসমহোৎসব ২০২৬ সম্পন্ন হয়েছে — জয় রাধে কৃষ্ণ';diff=0}
     var s=Math.floor(diff/1000);
     document.getElementById('d').textContent=B(Math.floor(s/86400));
