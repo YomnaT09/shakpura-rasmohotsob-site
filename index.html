@@ -385,7 +385,19 @@ html[data-theme=dark] .tab{background:#170a0f!important;color:#f4c95d!important}
 #namamrita .card .pl::before{content:"📍 ";font-size:11px}
 #namamrita .card .ms{display:inline-block;margin:7px 0 9px;font-size:14.5px}
 #namamrita .card .ms::before{content:"· "}
-.tpane{padding:16px 12px 6px!important}</style>
+.tpane{padding:16px 12px 6px!important}.lv,.lv *{font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif!important}.lv h4{font-family:'Noto Serif Bengali',serif!important}
+.lv{padding:14px 0 14px 14px}
+.lv h4{color:#ffe29a;font-size:17px;margin:0 14px 10px 0;text-align:center}
+.lv .rail{display:flex;gap:10px;overflow-x:auto;padding:6px 14px 8px 0;scroll-snap-type:x proximity;scrollbar-width:none}
+.lv .rail::-webkit-scrollbar{display:none}
+.lv .c{flex:0 0 132px;scroll-snap-align:center;border:1.5px solid rgba(244,201,93,.4);border-radius:16px;padding:10px 8px;text-align:center;color:#e9d3c7;background:rgba(0,0,0,.18)}
+.lv .c i{font-style:normal;font-size:26px;display:block}.lv .c .tm{font-size:12px;color:#d9b970;margin:3px 0 2px}.lv .c .nm{font-size:13.5px;line-height:1.35;font-weight:600}
+.lv .c.done{opacity:.4}
+.lv .c.now{border-color:#ffd979;background:linear-gradient(160deg,rgba(224,169,43,.45),rgba(107,15,26,.3));color:#fff;box-shadow:0 0 22px rgba(255,210,90,.55);transform:scale(1.04)}
+.lv .c.now:before{content:"● এখন";display:block;color:#ff7a5c;font-size:12px;font-weight:700}
+.lv .c.soon{border:1.5px dashed #f4c95d}.lv .c.soon:before{content:"পরের";display:block;color:#ffd979;font-size:12px}
+@media(min-width:700px){.lv{padding-right:14px}.lv .rail{justify-content:center}}
+</style>
 <script>(function(){var r=document.documentElement,k='rm-theme',q=(location.search.match(/t=(dark|light)/)||[])[1],p=null;try{p=localStorage.getItem(k)}catch(e){}
 var sys=window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';r.setAttribute('data-theme',q||p||sys);
 function set(t){r.setAttribute('data-theme',t);try{localStorage.setItem(k,t)}catch(e){}}
@@ -415,6 +427,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <div class="wrap">
   <div class="count">
     <p id="cdLabel">রাসমহোৎসব শুরু হতে বাকি</p>
+    <div id="live" hidden></div>
     <div class="cd"><div><b id="d">০</b><span>দিন</span></div><div><b id="h">০</b><span>ঘণ্টা</span></div><div><b id="m">০</b><span>মিনিট</span></div><div><b id="s">০</b><span>সেকেন্ড</span></div></div>
   </div>
 </div>
@@ -774,17 +787,36 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   window.addEventListener('scroll',function(){spy();stuck()},{passive:true});spy();stuck();
 })();
 (function(){
-  var bn='০১২৩৪৫৬৭৮৯';
-  function B(n){return String(n).replace(/\d/g,function(d){return bn[d]})}
+  var DAYS=[
+  {d:21,w:'শনিবার',it:[[10,0,2,'🪔','রাসবিহারীর পূজা'],[12,1,1.5,'🍛','রাজভোগ ও ভোগ আরতি'],[15,0,2.5,'🎶','মনোজ্ঞ সংগীতানুষ্ঠান'],[19,0,2,'🎤','মহতী ধর্মসভা'],[22,0,2,'🍽️','অন্নপ্রসাদ আস্বাদন']]},
+  {d:22,w:'রবিবার',it:[[8,0,2,'💧','শ্রীবিগ্রহের অভিষেক'],[12,1,1.5,'🍛','শ্রীশ্রী ঠাকুরের রাজভোগ'],[17,0,2.5,'🌊','গঙ্গাপূজা ও নামযজ্ঞের শুভ অধিবাস'],[20,0,2,'🎶','ধর্মীয় সংগীতানুষ্ঠান – টিম বৃষ্টি'],[22,0,2,'🍽️','মহাপ্রসাদ আস্বাদন']]},
+  {d:23,w:'সোমবার',it:[[4,0,8,'🪘','মহানামযজ্ঞের শুভারম্ভ ও অহোরাত্র মহানামসংকীর্তন'],[12,1,1.5,'🍛','শ্রীশ্রী ঠাকুরের রাজভোগ'],[13,0,1.5,'🍽️','মহাপ্রসাদ আস্বাদন'],[21,0,1.5,'🍽️','মহাপ্রসাদ আস্বাদন'],[24,1,1.5,'🪔','শ্রীশ্রী রাসবিহারী পূজা']]},
+  {d:24,w:'মঙ্গলবার',it:[[0,0,24,'🪘','অহোরাত্র মহানামসংকীর্তন'],[12,1,1.5,'🍛','শ্রীশ্রী ঠাকুরের রাজভোগ'],[13,0,1.5,'🍽️','মহাপ্রসাদ আস্বাদন'],[18,1,1.5,'🌼','সত্যনারায়ণ পূজা'],[21,0,1.5,'🍽️','মহাপ্রসাদ আস্বাদন']]},
+  {d:25,w:'বুধবার',it:[[5,30,4,'🌅','উষালগ্নে নামসংকীর্তনের পূর্ণাহুতি ও পল্লী পরিক্রমা']]}
+  ];
+  var BN='০১২৩৪৫৬৭৮৯';function B(n){return String(n).replace(/\d/g,function(c){return BN[c]})}
+  function dh(){/*NOWOVR*/return new Date(Date.now()+6*3600e3)}
+  function T(h,m){var ap=h%24;var p=ap<4?'রাত':ap<6?'ভোর':ap<12?'সকাল':ap<16?'দুপুর':ap<18?'বিকাল':ap<20?'সন্ধ্যা':'রাত';var hh=ap%12||12;return p+' '+B(hh)+':'+B(('0'+m).slice(-2))}
+  function eff(now){var d=now.getUTCDate(),hr=now.getUTCHours()+now.getUTCMinutes()/60;if(d==24&&hr<1.6){d=23;hr+=24}return{d:d,hr:hr}}
+  function state(day,e){var out=[];day.it.forEach(function(x){var st=x[0]+x[1]/60,en=st+x[2],s;if(e.d>day.d||(e.d==day.d&&e.hr>=en))s='done';else if(e.d==day.d&&e.hr>=st)s='now';else s='next';out.push(s)});var f=out.indexOf('next');if(out.indexOf('now')<0&&f>=0&&e.d==day.d)out[f]='soon';return out}
+  function pick(e){var i=-1;DAYS.forEach(function(x,k){if(x.d==e.d)i=k});return i<0?0:i}
+  function sigOf(now){var e=eff(now),i=pick(e);return i+':'+state(DAYS[i],e).join(',')}
+  function render(box,now){var e=eff(now),day=DAYS[pick(e)],st=state(day,e);var h='<div class="lv"><h4>🪔 আজ '+B(day.d)+' নভেম্বর · '+day.w+'</h4><div class="rail">';
+   day.it.forEach(function(x,k){h+='<div class="c '+st[k]+'"><i>'+x[3]+'</i><div class="tm">'+T(x[0],x[1])+'</div><div class="nm">'+x[4]+'</div></div>'});box.innerHTML=h+'</div></div>';
+   var n=box.querySelector('.now,.soon');if(n)setTimeout(function(){var r=box.querySelector('.rail');r.scrollLeft=n.offsetLeft-r.clientWidth/2+n.offsetWidth/2},50)}
+
   var start=new Date('2026-11-21T00:00:00+06:00').getTime();
   var end=new Date('2026-11-26T00:00:00+06:00').getTime();
-  var lbl=document.getElementById('cdLabel');
+  var lbl=document.getElementById('cdLabel'),cd=document.querySelector('.count .cd'),live=document.getElementById('live'),sig='';
   function tick(){
     var now=Date.now(),diff=start-now;
-    if(diff<=0){
-      lbl.textContent= now<end ? '🪔 রাসমহোৎসব চলছে — সবাইকে স্বাগতম!' : 'রাসমহোৎসব ২০২৬ সম্পন্ন হয়েছে — জয় রাধে কৃষ্ণ';
-      diff=0;
+    if(now>=start&&now<end){
+      lbl.style.display='none';cd.style.display='none';live.hidden=false;
+      var t=dh(),sg=sigOf(t);if(sg!==sig){sig=sg;render(live,t)}
+      return;
     }
+    live.hidden=true;lbl.style.display='';cd.style.display='';
+    if(diff<=0){lbl.textContent='রাসমহোৎসব ২০২৬ সম্পন্ন হয়েছে — জয় রাধে কৃষ্ণ';diff=0}
     var s=Math.floor(diff/1000);
     document.getElementById('d').textContent=B(Math.floor(s/86400));
     document.getElementById('h').textContent=B(Math.floor(s%86400/3600));
